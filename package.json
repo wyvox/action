@@ -1,5 +1,5 @@
 {
-	"name": "action-setup-pnpm",
+	"name": "action",
 	"scripts": {
 		"lint": "prettier --check .",
 		"lint:fix": "prettier --write ."

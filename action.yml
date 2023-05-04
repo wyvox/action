@@ -1,10 +1,11 @@
-name: 'Setup node, pnpm, and dependency cache'
-description: 'Installs pnpm, uses actions/setup-node for cache, and then runs pnpm install'
+name: 'Setup repo, pnpm, node, cache'
+description: 'Checks out repository, installs pnpm, uses actions/setup-node for cache, and then runs pnpm install'
 author: NullVoxPopuli
 branding:
   icon: 'package'
   color: 'orange'
 inputs:
+  # pnpm and node options
   node-version:
     description: "Override the default node version, or override what is specified in your project's volta config"
     required: false
@@ -12,36 +13,32 @@ inputs:
     description: 'Override the default pnpm version, which defaults to the latest 8.x'
     required: false
     default: 8
-  no-lockfile:
-    description: 'When testing with floating dependencies, the lockfile will need to be ignored. Enabling this deletes the lockfile before running pnpm install. This is safe as long as further action steps do not commit the change'
-    required: false
-    default: false
-  args:
+  pnpm-args:
     description: 'Directly pass args to pnpm'
     required: false
+
+  # checkout options
+  persist-credentials:
+    description: 'Whether to configure the token or SSH key with the local git config'
+    default: true
+  fetch-depth:
+    description: 'Number of commits to fetch. 0 indicates all history for all branches and tags.'
+    default: 1
+
 
 runs:
   using: 'composite'
   steps:
-    - name: 'Install pnpm'
-      # this action aliases the major (via branch) to the latest full version
-      # https://github.com/pnpm/action-setup/branches/all
-      uses: pnpm/action-setup@v2
+    - name: 'Checkout repository'
+      uses: actions/checkout@v3
       with:
-        version: ${{ inputs.pnpm-version }}
-    - name: 'Setup node and the cache for pnpm'
-      # this action aliases the major to the latest full version 
-      # https://github.com/actions/setup-node/tags
-      uses: actions/setup-node@v3
-      with:
-        cache: 'pnpm'
-        node-version: ${{ inputs.node-version }}
-    - name: 'Install dependencies'
-      shell: 'bash'
-      run: |
-        if [[ "${{ inputs.no-lockfile }}" == "true" ]]; then 
-          echo "Detected option --no-lockfile. Lockfile will be deleted before install."
-          rm -f pnpm-lock.yaml
-        fi
+        persist-credentials: ${{ inputs.persist-credentials }}
+        fetch-depth: ${{ inputs.fetch-depth }}
 
-        pnpm install ${{ inputs.args }}
+    - name: 'Setup dependencies and cache'
+      uses: NullVoxPopuli/action-setup-pnpm@v2
+      with: 
+        node-version: ${{ inputs.node-version }}
+        pnpm-version: ${{ inputs.pnpm-version }}
+        args: ${{ inputs.pnpm-args }}
+
