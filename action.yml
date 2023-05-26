@@ -35,6 +35,11 @@ runs:
         persist-credentials: ${{ inputs.persist-credentials }}
         fetch-depth: ${{ inputs.fetch-depth }}
 
+    - name: 'Setup local TurboRepo server'
+      uses: felixmosh/turborepo-gh-artifacts@v2
+      with:
+        repo-token: ${{ inputs.repo-token }}
+
     - name: 'Setup dependencies and cache'
       uses: NullVoxPopuli/action-setup-pnpm@v2
       with: 
