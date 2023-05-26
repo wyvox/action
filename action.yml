@@ -27,7 +27,7 @@ inputs:
 
   # turborepo options
   repo-token:
-    description: 'A token with repo access to allow turborepo to upload and download artifacts'
+    description: 'A token with repo access to allow turborepo to upload and download artifacts. The default secrets.GITHUB_TOKEN is enough.'
     required: false
 
 
@@ -41,6 +41,7 @@ runs:
         fetch-depth: ${{ inputs.fetch-depth }}
 
     - name: 'Setup local TurboRepo server'
+      if: ${{ inputs.repo-token }}
       uses: felixmosh/turborepo-gh-artifacts@v2
       with:
         repo-token: ${{ inputs.repo-token }}
