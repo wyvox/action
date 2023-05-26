@@ -25,6 +25,11 @@ inputs:
     description: 'Number of commits to fetch. 0 indicates all history for all branches and tags.'
     default: 1
 
+  # turborepo options
+  repo-token:
+    description: 'A token with repo access to allow turborepo to upload and download artifacts'
+    required: false
+
 
 runs:
   using: 'composite'
