@@ -25,6 +25,11 @@ inputs:
     description: 'Number of commits to fetch. 0 indicates all history for all branches and tags.'
     default: 1
 
+  # turborepo options
+  repo-token:
+    description: 'A token with repo access to allow turborepo to upload and download artifacts. The default secrets.GITHUB_TOKEN is enough.'
+    required: false
+
 
 runs:
   using: 'composite'
@@ -34,6 +39,12 @@ runs:
       with:
         persist-credentials: ${{ inputs.persist-credentials }}
         fetch-depth: ${{ inputs.fetch-depth }}
+
+    - name: 'Setup local TurboRepo server'
+      if: ${{ inputs.repo-token }}
+      uses: felixmosh/turborepo-gh-artifacts@v2
+      with:
+        repo-token: ${{ inputs.repo-token }}
 
     - name: 'Setup dependencies and cache'
       uses: NullVoxPopuli/action-setup-pnpm@v2
