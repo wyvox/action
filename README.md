@@ -20,7 +20,7 @@ See action.yml for options
 
 # Pnpm and Cache
 
-This is managed by [NullVoxPopuli/action-setup-pnpm](https://github.com/NullVoxPopuli/action-setup-pnpm/)
+This is managed by [wyvox/action-setup-pnpm](https://github.com/wyvox/action-setup-pnpm/)
 
 This respects volta entries in package.json.
 
