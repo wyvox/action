@@ -12,7 +12,6 @@ inputs:
   pnpm-version:
     description: 'Override the default pnpm version, which defaults to the latest 8.x'
     required: false
-    default: 8
   pnpm-args:
     description: 'Directly pass args to pnpm'
     required: false
