@@ -1,5 +1,5 @@
 name: 'Setup repo, pnpm, node, cache'
-description: 'Checks out repository, installs pnpm, uses actions/setup-node for cache, and then runs pnpm install. Optionally provides artifact-based turboroepo.'
+description: 'Removes all boilerplate: checkout, pnpm, cache, optional turborepo.'
 author: NullVoxPopuli
 branding:
   icon: 'package'
