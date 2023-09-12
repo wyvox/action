@@ -66,5 +66,5 @@ env:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 'Setup dependencies and cache'
-      uses: NullVoxPopuli/action-setup-pnpm@v2
+      uses: wyvox/action-setup-pnpm@v2
 ```
