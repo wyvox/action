@@ -34,7 +34,7 @@ runs:
   using: 'composite'
   steps:
     - name: 'Checkout repository'
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         persist-credentials: ${{ inputs.persist-credentials }}
         fetch-depth: ${{ inputs.fetch-depth }}
@@ -46,7 +46,7 @@ runs:
         repo-token: ${{ inputs.repo-token }}
 
     - name: 'Setup dependencies and cache'
-      uses: wyvox/action-setup-pnpm@v2
+      uses: wyvox/action-setup-pnpm@v3
       with: 
         node-version: ${{ inputs.node-version }}
         pnpm-version: ${{ inputs.pnpm-version }}
