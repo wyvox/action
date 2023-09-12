@@ -3,7 +3,7 @@
 The GitHub action that does all setup for pnpm projects.
 - checkout
 - node
-- volta
+- volta support (without the volta action)
 - pnpm + cache
 - local turborepo server
 
