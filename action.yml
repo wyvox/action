@@ -30,6 +30,9 @@ inputs:
   lfs:
     description: 'Whether to download Git-LFS files'
     default: ''
+  ref:
+    description: 'Which git ref to use when checking out code'
+    default: ''
 
   # turborepo options
   repo-token:
