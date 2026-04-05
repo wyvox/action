@@ -44,7 +44,7 @@ runs:
   using: 'composite'
   steps:
     - name: 'Checkout repository'
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         persist-credentials: ${{ inputs.persist-credentials }}
         fetch-depth: ${{ inputs.fetch-depth }}
@@ -52,7 +52,7 @@ runs:
 
     - name: 'Setup local TurboRepo server'
       if: ${{ inputs.repo-token }}
-      uses: felixmosh/turborepo-gh-artifacts@v3
+      uses: felixmosh/turborepo-gh-artifacts@v4
       with:
         repo-token: ${{ inputs.repo-token }}
 
